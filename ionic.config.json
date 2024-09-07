@@ -1,0 +1,7 @@
+{
+  "name": "tnetwoapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,15 @@
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .rotating-img {
+    width: 400px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transform-style: preserve-3d;  
+    transition: transform 0.1s ease-out; 
+  }
+  

@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Principal</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onLogout()">Cerrar Sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="image-container">
+    <ion-img id="movableImage" src="assets/pase.png" class="rotating-img"></ion-img>
+  </div>
+
+  <ion-item>
+    <ion-label>MEDIA</ion-label>
+    <ion-button (click)="onReload()">RECARGAR</ion-button>
+  </ion-item>
+
+</ion-content>
+

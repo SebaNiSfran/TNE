@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar">
+    <ion-title class="animated-title">TNE-APP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding login-content">
+  <div class="header-image-container">
+    <img src="assets/pases.jpg" alt="Login Image" class="header-image">
+  </div>
+
+  <div class="login-container">
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <ion-item>
+        <ion-label position="floating">Correo Electrónico</ion-label>
+        <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" type="submit" class="ion-margin-top">Iniciar Sesión</ion-button>
+    </form>
+
+    <ion-button expand="full" color="light" class="ion-margin-top" (click)="onRegister()">
+      ¿No tienes cuenta? Regístrate
+    </ion-button>
+
+    <ion-button expand="full" color="light" class="ion-margin-top" (click)="onRecoverPassword()">
+      Recuperar Contraseña
+    </ion-button>
+  </div>
+</ion-content>
+
+

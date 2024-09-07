@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Creación de Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()" #createAccountForm="ngForm">
+    <!-- Campo para el RUT -->
+    <ion-item>
+      <ion-label position="floating" for="rutInput">RUT</ion-label>
+      <ion-input id="rutInput" [(ngModel)]="rut" name="rut" required></ion-input>
+    </ion-item>
+
+    <!-- Campo para el Nombre Completo -->
+    <ion-item>
+      <ion-label position="floating" for="fullNameInput">Nombre Completo</ion-label>
+      <ion-input id="fullNameInput" [(ngModel)]="fullName" name="fullName" required></ion-input>
+    </ion-item>
+
+    <!-- Campo para el Rango Educativo -->
+    <ion-item>
+      <ion-label position="floating" for="educationLevelSelect">Rango Educativo</ion-label>
+      <ion-select id="educationLevelSelect" [(ngModel)]="educationLevel" name="educationLevel" required>
+        <ion-select-option value="basico">Básico</ion-select-option>
+        <ion-select-option value="media">Media</ion-select-option>
+        <ion-select-option value="superior">Superior</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Campo para la Fecha de Nacimiento -->
+    <ion-item>
+      <ion-label position="floating" for="birthDateInput">Fecha de Nacimiento</ion-label>
+      <ion-input 
+        id="birthDateInput"
+        type="date"
+        [(ngModel)]="birthDate"
+        name="birthDate"
+        required>
+      </ion-input>
+    </ion-item>
+
+    <!-- Campo para el Correo Electrónico -->
+    <ion-item>
+      <ion-label position="floating" for="emailInput">Correo Electrónico</ion-label>
+      <ion-input
+        id="emailInput"
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        (ngModelChange)="validateEmail()"
+        required>
+      </ion-input>
+      <ion-note color="danger" *ngIf="email && !emailValid">El correo debe ser del tipo &#64;example.com</ion-note>
+    </ion-item>
+
+    <!-- Botón de Enviar -->
+    <ion-button expand="full" type="submit" class="ion-margin-top" [disabled]="!isFormValid()">Crear Cuenta</ion-button>
+
+    <!-- Botón para volver al inicio -->
+    <ion-button expand="full" color="light" class="ion-margin-top" (click)="goToLogin()">Volver al inicio</ion-button>
+  </form>
+</ion-content>
+
+
+
