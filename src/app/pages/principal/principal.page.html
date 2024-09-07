@@ -9,6 +9,11 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
+  <!-- Mensaje de Bienvenida -->
+  <div class="welcome-message">
+    <h2>Bienvenido, {{ nombreUsuario }}</h2>
+  </div>
+
   <div class="image-container">
     <ion-img id="movableImage" src="assets/pase.png" class="rotating-img"></ion-img>
   </div>
@@ -19,4 +24,5 @@
   </ion-item>
 
 </ion-content>
+
 

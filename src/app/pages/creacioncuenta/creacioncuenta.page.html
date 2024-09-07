@@ -6,19 +6,16 @@
 
 <ion-content class="ion-padding">
   <form (ngSubmit)="onSubmit()" #createAccountForm="ngForm">
-    <!-- Campo para el RUT -->
     <ion-item>
-      <ion-label position="floating" for="rutInput">RUT</ion-label>
+      <ion-label position="floating" for="rutInput">RUT (Sin puntos y con guion)</ion-label>
       <ion-input id="rutInput" [(ngModel)]="rut" name="rut" required></ion-input>
     </ion-item>
 
-    <!-- Campo para el Nombre Completo -->
     <ion-item>
       <ion-label position="floating" for="fullNameInput">Nombre Completo</ion-label>
       <ion-input id="fullNameInput" [(ngModel)]="fullName" name="fullName" required></ion-input>
     </ion-item>
 
-    <!-- Campo para el Rango Educativo -->
     <ion-item>
       <ion-label position="floating" for="educationLevelSelect">Rango Educativo</ion-label>
       <ion-select id="educationLevelSelect" [(ngModel)]="educationLevel" name="educationLevel" required>
@@ -28,7 +25,6 @@
       </ion-select>
     </ion-item>
 
-    <!-- Campo para la Fecha de Nacimiento -->
     <ion-item>
       <ion-label position="floating" for="birthDateInput">Fecha de Nacimiento</ion-label>
       <ion-input 
@@ -40,7 +36,6 @@
       </ion-input>
     </ion-item>
 
-    <!-- Campo para el Correo Electrónico -->
     <ion-item>
       <ion-label position="floating" for="emailInput">Correo Electrónico</ion-label>
       <ion-input
@@ -51,16 +46,12 @@
         (ngModelChange)="validateEmail()"
         required>
       </ion-input>
-      <ion-note color="danger" *ngIf="email && !emailValid">El correo debe ser del tipo &#64;example.com</ion-note>
+      <!-- Actualizado el mensaje de error -->
+      <ion-note color="danger" *ngIf="email && !emailValid">Por favor, ingrese un correo electrónico válido</ion-note>
     </ion-item>
 
-    <!-- Botón de Enviar -->
-    <ion-button expand="full" type="submit" class="ion-margin-top" [disabled]="!isFormValid()">Crear Cuenta</ion-button>
+    <ion-button expand="full" type="submit" class="ion-margin-top">Crear Cuenta</ion-button>
 
-    <!-- Botón para volver al inicio -->
     <ion-button expand="full" color="light" class="ion-margin-top" (click)="goToLogin()">Volver al inicio</ion-button>
   </form>
 </ion-content>
-
-
-

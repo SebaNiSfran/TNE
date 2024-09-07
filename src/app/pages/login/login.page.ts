@@ -30,6 +30,9 @@ export class LoginPage implements OnInit {
         return;
       }
 
+      const nombreUsuario = this.email.split('@')[0];
+      localStorage.setItem('nombreUsuario', nombreUsuario.charAt(0).toUpperCase() + nombreUsuario.slice(1));
+
       console.log('Email:', this.email);
       console.log('Contraseña:', this.password);
 
@@ -40,6 +43,7 @@ export class LoginPage implements OnInit {
       });
       toast.present();
 
+      // Redirie a la página principal
       this.router.navigate(['/principal']);
     } else {
       const toast = await this.toastController.create({
@@ -64,3 +68,4 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/recover-password']);
   }
 }
+

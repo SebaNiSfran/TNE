@@ -9,6 +9,7 @@ import { GestureController } from '@ionic/angular';
 })
 export class PrincipalPage implements OnInit {
   rotation: number = 0;  
+  nombreUsuario: string = ''; 
 
   constructor(
     private router: Router,
@@ -17,6 +18,7 @@ export class PrincipalPage implements OnInit {
 
   ngOnInit() {
     this.enableImageRotation();
+    this.loadUserName(); 
   }
 
   onLogout() {
@@ -42,5 +44,13 @@ export class PrincipalPage implements OnInit {
       gesture.enable(true);
     }
   }
-}
 
+  loadUserName() {
+    const storedName = localStorage.getItem('nombreUsuario');
+    if (storedName) {
+      this.nombreUsuario = storedName;
+    } else {
+      this.nombreUsuario = 'Usuario'; 
+    }
+  }
+}

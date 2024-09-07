@@ -23,11 +23,12 @@ export class CreacioncuentaPage implements OnInit {
   ngOnInit() {}
 
   validateEmail() {
-    this.emailValid = this.email.endsWith('@example.com');
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    this.emailValid = this.email === '' || emailRegex.test(this.email);
   }
 
   isFormValid(): boolean {
-    return !!(this.rut && this.fullName && this.educationLevel && this.birthDate && this.emailValid);
+    return !!(this.rut && this.fullName && this.educationLevel && this.birthDate && this.email && this.emailValid);
   }
 
   async onSubmit() {
@@ -40,7 +41,6 @@ export class CreacioncuentaPage implements OnInit {
         email: this.email
       });
 
-      // Mostrar un toast de éxito
       const toast = await this.toastController.create({
         message: 'Creación exitosa',
         duration: 2000,
@@ -48,10 +48,22 @@ export class CreacioncuentaPage implements OnInit {
       });
       toast.present();
 
-      // Redirigir al login
+      this.rut = '';
+      this.fullName = '';
+      this.educationLevel = '';
+      this.birthDate = null;
+      this.email = '';
+      this.emailValid = true;
+
       this.router.navigate(['/login']);
     } else {
       console.log('Formulario incompleto o correo inválido');
+      const toast = await this.toastController.create({
+        message: 'Por favor, complete todos los campos correctamente.',
+        duration: 2000,
+        color: 'danger',
+      });
+      toast.present();
     }
   }
 
@@ -59,6 +71,8 @@ export class CreacioncuentaPage implements OnInit {
     this.router.navigate(['/login']);
   }
 }
+
+
 
 
 
