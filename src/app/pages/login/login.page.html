@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding login-content">
+<ion-content [fullscreen]="true" class="ion-padding login-content" scrollEvents="true" (ionScroll)="onScroll($event)">
   <div class="header-image-container">
     <img src="assets/pases.jpg" alt="Login Image" class="header-image">
   </div>
@@ -33,5 +33,4 @@
     </ion-button>
   </div>
 </ion-content>
-
 

@@ -17,7 +17,15 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() { }
-
+  onScroll(event: any) {
+    const scrollElement = event.detail.scrollTop;
+    const headerImage = document.querySelector('.header-image-container') as HTMLElement;
+    if (headerImage) {
+      const opacity = Math.max(0, 1 - scrollElement / 300);
+      headerImage.style.opacity = opacity.toString();
+    }
+  }
+  
   async onLogin() {
     if (this.email && this.password) {
       if (!this.validateEmail(this.email)) {
@@ -43,7 +51,6 @@ export class LoginPage implements OnInit {
       });
       toast.present();
 
-      // Redirie a la página principal
       this.router.navigate(['/principal']);
     } else {
       const toast = await this.toastController.create({

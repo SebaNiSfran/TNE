@@ -24,10 +24,8 @@ export class RecoverPasswordPage implements OnInit {
     if (this.email) {
       console.log('Enviar enlace de recuperación a', this.email);
 
-      // Vaciar el campo de correo electrónico
       this.email = '';
 
-      // Mostrar un toast de éxito
       const toast = await this.toastController.create({
         message: 'Enlace de recuperación enviado con éxito',
         duration: 2000,
