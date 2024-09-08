@@ -1,5 +1,8 @@
 ion-content {
   --background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .toolbar {
@@ -10,11 +13,10 @@ ion-content {
 
 .login-content {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  min-height: 100vh; 
-  padding: 0 20px; 
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .header-image-container {
@@ -40,6 +42,7 @@ ion-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto; /* Centra el contenedor en la pantalla */
 }
 
 .animated-item {
@@ -97,7 +100,7 @@ ion-button[color="light"] {
   display: inline-block;
   white-space: nowrap;
   animation: slide 15s linear infinite;
-  color: #000; 
+  color: #000;
 }
 
 /* Responsividad */
@@ -126,4 +129,3 @@ ion-button[color="light"] {
     padding: 25px;
   }
 }
-
