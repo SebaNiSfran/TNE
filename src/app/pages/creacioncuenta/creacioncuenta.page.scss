@@ -1,0 +1,68 @@
+ion-content {
+    --background: #f0f0f0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+}
+
+.ion-padding {
+    background: white; 
+    border-radius: 12px; 
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease; 
+    padding: 30px; /* Espacio interno del formulario */
+    width: 100%; /* Ancho completo para responsividad */
+    max-width: 400px; /* Ancho máximo del formulario */
+}
+
+.ion-padding:hover {
+    transform: translateY(-4px); 
+}
+
+ion-item {
+    margin-bottom: 15px; 
+}
+
+ion-button {
+    --border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    font-weight: bold; 
+}
+
+ion-button:hover {
+    transform: scale(1.05); 
+}
+
+ion-button[color="light"] {
+    color: #4285f4; 
+    background: transparent; 
+    border: 2px solid #4285f4; 
+}
+
+ion-button[color="light"]:hover {
+    background: linear-gradient(90deg, #4285f4, #34a853, #fbbc05, #ea4335); /* Gradiente de colores */
+    color: white; 
+}
+
+ion-note {
+    margin-top: 5px; 
+    font-size: 0.9em; 
+    font-style: italic; 
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    ion-content {
+        padding: 10px; 
+    }
+}
+
+@media (min-width: 601px) {
+    ion-content {
+        padding: 20px; 
+    }
+}
+
+  
+  

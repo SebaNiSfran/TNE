@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { PrincipalPageRoutingModule } from './principal-routing.module';
-import { PrincipalPage } from './principal.page';
+
+import { RevalidarTnePageRoutingModule } from './revalidar-tne-routing.module';
+
+import { RevalidarTnePage } from './revalidar-tne.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PrincipalPageRoutingModule
+    RevalidarTnePageRoutingModule
   ],
-  declarations: [PrincipalPage]
+  declarations: [RevalidarTnePage]
 })
-export class PrincipalPageModule {}
+export class RevalidarTnePageModule {}

@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { PrincipalPageRoutingModule } from './principal-routing.module';
-import { PrincipalPage } from './principal.page';
+
+import { RecuperarTnePageRoutingModule } from './recuperar-tne-routing.module';
+
+import { RecuperarTnePage } from './recuperar-tne.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PrincipalPageRoutingModule
+    RecuperarTnePageRoutingModule
   ],
-  declarations: [PrincipalPage]
+  declarations: [RecuperarTnePage]
 })
-export class PrincipalPageModule {}
+export class RecuperarTnePageModule {}

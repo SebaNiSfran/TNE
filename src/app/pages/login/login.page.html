@@ -12,9 +12,19 @@
   <div class="login-container">
     <form (ngSubmit)="onLogin()" #loginForm="ngForm">
       <ion-item>
-        <ion-label position="floating">Correo Electrónico</ion-label>
-        <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
-        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-label position="floating">RUT</ion-label>
+        <ion-input type="text" [(ngModel)]="rut" name="rut" required pattern="[0-9]{7,8}-[0-9Kk]" placeholder="123456789-1"></ion-input>
+        <ion-icon name="id-card-outline" slot="start"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Nivel Educacional</ion-label>
+        <ion-select [(ngModel)]="educationLevel" name="educationLevel" required>
+          <ion-select-option value="basica">Básica</ion-select-option>
+          <ion-select-option value="media">Media</ion-select-option>
+          <ion-select-option value="superior">Superior</ion-select-option>
+        </ion-select>
+        <ion-icon name="school-outline" slot="start"></ion-icon>
       </ion-item>
 
       <ion-item>
@@ -35,4 +45,5 @@
     </ion-button>
   </div>
 </ion-content>
+
 

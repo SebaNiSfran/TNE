@@ -23,6 +23,15 @@ const routes: Routes = [
     path: 'creacioncuenta',
     loadChildren: () => import('./pages/creacioncuenta/creacioncuenta.module').then( m => m.CreacioncuentaPageModule)
   },
+  {
+    path: 'recuperar-tne',
+    loadChildren: () => import('./recuperar-tne/recuperar-tne.module').then( m => m.RecuperarTnePageModule)
+  },
+  {
+    path: 'revalidar-tne',
+    loadChildren: () => import('./revalidar-tne/revalidar-tne.module').then( m => m.RevalidarTnePageModule)
+  },
+
 ];
 
 @NgModule({

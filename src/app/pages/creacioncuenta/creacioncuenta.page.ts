@@ -13,6 +13,8 @@ export class CreacioncuentaPage implements OnInit {
   educationLevel: string = '';
   birthDate: string | null = null;
   email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
   emailValid: boolean = true;
 
   constructor(
@@ -28,38 +30,49 @@ export class CreacioncuentaPage implements OnInit {
   }
 
   isFormValid(): boolean {
-    return !!(this.rut && this.fullName && this.educationLevel && this.birthDate && this.email && this.emailValid);
+    return !!(
+      this.rut && this.fullName && this.educationLevel &&
+      this.birthDate && this.email && this.emailValid &&
+      this.password && this.password === this.confirmPassword
+    );
   }
 
   async onSubmit() {
     if (this.isFormValid()) {
-      console.log('Datos enviados:', {
+      const userData = {
         rut: this.rut,
         fullName: this.fullName,
-        educationLevel: this.educationLevel,
+        educationLevel: this.normalizeEducationLevel(this.educationLevel),
         birthDate: this.birthDate,
-        email: this.email
-      });
+        email: this.email,
+        password: this.password
+      };
+
+      localStorage.setItem('userAccount', JSON.stringify(userData));
+
+      console.log('Datos guardados:', JSON.parse(localStorage.getItem('userAccount') || '{}'));
 
       const toast = await this.toastController.create({
-        message: 'Creación exitosa',
+        message: 'Cuenta creada exitosamente',
         duration: 2000,
         color: 'success',
       });
       toast.present();
 
-      this.rut = '';
-      this.fullName = '';
-      this.educationLevel = '';
-      this.birthDate = null;
-      this.email = '';
-      this.emailValid = true;
-
       this.router.navigate(['/login']);
     } else {
-      console.log('Formulario incompleto o correo inválido');
+      let errorMessage = 'Por favor, complete todos los campos correctamente.';
+      
+      if (!this.rut) errorMessage = 'Por favor, ingrese su RUT.';
+      else if (!this.fullName) errorMessage = 'Por favor, ingrese su nombre completo.';
+      else if (!this.educationLevel) errorMessage = 'Por favor, seleccione su nivel educativo.';
+      else if (!this.birthDate) errorMessage = 'Por favor, ingrese su fecha de nacimiento.';
+      else if (!this.email || !this.emailValid) errorMessage = 'Por favor, ingrese un correo electrónico válido.';
+      else if (!this.password) errorMessage = 'Por favor, ingrese una contraseña.';
+      else if (this.password !== this.confirmPassword) errorMessage = 'Las contraseñas no coinciden.';
+
       const toast = await this.toastController.create({
-        message: 'Por favor, complete todos los campos correctamente.',
+        message: errorMessage,
         duration: 2000,
         color: 'danger',
       });
@@ -67,10 +80,27 @@ export class CreacioncuentaPage implements OnInit {
     }
   }
 
+  normalizeEducationLevel(level: string): string {
+    const normalized = level.toLowerCase().trim();
+    switch (normalized) {
+      case 'basico':
+      case 'basica':
+        return 'basica';
+      case 'medio':
+      case 'media':
+        return 'media';
+      case 'superior':
+        return 'superior';
+      default:
+        return normalized;
+    }
+  }
+
   goToLogin() {
     this.router.navigate(['/login']);
   }
 }
+
 
 
 

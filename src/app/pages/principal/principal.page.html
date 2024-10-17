@@ -1,27 +1,41 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Principal</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onLogout()">Cerrar Sesión</ion-button>
+      <ion-button (click)="onLogout()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-
-  <div class="welcome-message">
+  <div class="welcome-container">
     <h2>Bienvenido, {{ nombreUsuario }}</h2>
+    <p>Nivel Educacional: {{ nivelEducacional }}</p>
   </div>
 
   <div class="image-container">
     <ion-img id="movableImage" src="assets/pase.png" class="rotating-img"></ion-img>
   </div>
 
-  <ion-item>
-    <ion-label>MEDIA</ion-label>
-    <ion-button (click)="onReload()">RECARGAR</ion-button>
+  <div class="action-buttons">
+    <ion-button expand="block" (click)="onRevalidarTNE()">
+      <ion-icon name="refresh-outline" slot="start"></ion-icon>
+      Revalidar TNE
+    </ion-button>
+    <ion-button expand="block" (click)="onRecuperarTNE()">
+      <ion-icon name="key-outline" slot="start"></ion-icon>
+      Recuperar TNE
+    </ion-button>
+  </div>
+
+  <ion-item class="recharge-item">
+    <ion-label>{{ nivelEducacional }}</ion-label>
+    <ion-button (click)="onReload()">
+      <ion-icon name="reload-outline" slot="start"></ion-icon>
+      RECARGAR
+    </ion-button>
   </ion-item>
-
 </ion-content>
-
-
