@@ -1,0 +1,34 @@
+.error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f3f3;
+  }
+  
+  .error-container {
+    text-align: center;
+  }
+  
+  .error-container img {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .error-code {
+    font-size: 72px;
+    color: #4CAF50;
+    margin: 0;
+  }
+  
+  .error-message {
+    font-size: 24px;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .error-description {
+    color: #666;
+    margin-top: 10px;
+  }
+  
