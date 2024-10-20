@@ -28,12 +28,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'creacioncuenta',
-    redirectTo: 'creacioncuenta',
-    pathMatch: 'full'
-  },
-  {
-    path: '**',
+    path: 'e404',
     redirectTo: 'e404',
     pathMatch: 'full'
   },
