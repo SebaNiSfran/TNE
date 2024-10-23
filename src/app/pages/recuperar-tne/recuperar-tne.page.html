@@ -52,29 +52,33 @@
 
     <ion-item>
       <ion-label>Foto del CARNET (Ambos lados)</ion-label>
-      <ion-button expand="full" (click)="uploadImage('dni')">Cargar Imagen</ion-button>
+      <input type="file" #dniInput style="display: none" (change)="onFileSelected($event, 'dni')" accept="image/*">
+      <ion-button expand="full" (click)="dniInput.click()">Cargar Imagen</ion-button>
     </ion-item>
-
+    
     <ion-item>
       <ion-label>Certificado Alumno Regular</ion-label>
-      <ion-button expand="full" (click)="uploadImage('certificado')">Cargar Imagen</ion-button>
+      <input type="file" #certificadoInput style="display: none" (change)="onFileSelected($event, 'certificado')" accept="image/*">
+      <ion-button expand="full" (click)="certificadoInput.click()">Cargar Imagen</ion-button>
+    </ion-item>
+    
+    <ion-item *ngIf="isPhysical">
+      <ion-label>Constancia Policial de Pérdida</ion-label>
+      <input type="file" #constanciaInput style="display: none" (change)="onFileSelected($event, 'constancia')" accept="image/*">
+      <ion-button expand="full" (click)="constanciaInput.click()">Cargar Imagen</ion-button>
+    </ion-item>
+    
+    <ion-item *ngIf="isPhysical && nivelEducacional === 'superior'">
+      <ion-label>Comprobante de Pago</ion-label>
+      <input type="file" #comprobanteInput style="display: none" (change)="onFileSelected($event, 'comprobante')" accept="image/*">
+      <ion-button expand="full" (click)="comprobanteInput.click()">Cargar Imagen</ion-button>
     </ion-item>
 
     <ion-item>
       <ion-label>¿Recuperar en formato físico?</ion-label>
-      <ion-toggle [(ngModel)]="isPhysical" name="isPhysical" (ionChange)="togglePhysicalFields()"></ion-toggle>
+      <ion-toggle [(ngModel)]="isPhysical" name="isPhysical"></ion-toggle>
     </ion-item>
-
-    <ion-item *ngIf="isPhysical">
-      <ion-label>Constancia Policial de Pérdida</ion-label>
-      <ion-button expand="full" (click)="uploadImage('constancia')">Cargar Imagen</ion-button>
-    </ion-item>
-
-    <ion-item *ngIf="isPhysical && nivelEducacional === 'superior'">
-      <ion-label>Comprobante de Pago</ion-label>
-      <ion-button expand="full" (click)="uploadImage('comprobante')">Cargar Imagen</ion-button>
-    </ion-item>
-
+    
     <ion-item *ngIf="isPhysical">
       <ion-label position="floating">Edad</ion-label>
       <ion-input type="number" [(ngModel)]="edad" name="edad" required></ion-input>

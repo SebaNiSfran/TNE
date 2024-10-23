@@ -53,11 +53,13 @@
     <ion-item>
       <ion-label>Foto del CARNET (Ambos lados)</ion-label>
       <ion-button expand="full" (click)="uploadImage('dni')">Cargar Imagen</ion-button>
+      <ion-note *ngIf="imageDNIName">{{imageDNIName}}</ion-note>
     </ion-item>
-
+    
     <ion-item>
       <ion-label>Certificado Alumno Regular</ion-label>
       <ion-button expand="full" (click)="uploadImage('certificado')">Cargar Imagen</ion-button>
+      <ion-note *ngIf="imageCertificadoName">{{imageCertificadoName}}</ion-note>
     </ion-item>
 
     <ion-button expand="full" type="submit" color="primary">Enviar</ion-button>

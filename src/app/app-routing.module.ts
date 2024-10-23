@@ -28,8 +28,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'e404',
-    redirectTo: 'e404',
+    path: 'creacioncuenta',
+    redirectTo: 'creacioncuenta',
     pathMatch: 'full'
   },
   {
@@ -50,6 +50,11 @@ const routes: Routes = [
   {
     path: 'revalidar-tne',
     redirectTo: 'revalidar-tne',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'e404',
     pathMatch: 'full'
   },
   {
