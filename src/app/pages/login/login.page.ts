@@ -29,8 +29,8 @@ export class LoginPage implements OnInit {
   }
 
   async onLogin() {
-    const userAccountString = localStorage.getItem('userAccount');
-    if (!userAccountString) {
+    const userAccountsString = localStorage.getItem('userAccounts');
+    if (!userAccountsString) {
       await this.presentToast('No hay cuentas registradas. Por favor, crea una cuenta primero.', 'danger');
       return;
     }
@@ -45,22 +45,26 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    const userAccount = JSON.parse(userAccountString);
-    
-    const normalizedStoredLevel = this.normalizeEducationLevel(userAccount.educationLevel);
+    const userAccounts = JSON.parse(userAccountsString);
     const normalizedInputLevel = this.normalizeEducationLevel(this.educationLevel);
 
-    console.log('Stored:', userAccount);
-    console.log('Input:', { rut: this.rut, educationLevel: normalizedInputLevel, password: this.password });
+    const user = userAccounts.find(
+      (account: any) =>
+        account.rut === this.rut &&
+        this.normalizeEducationLevel(account.educationLevel) === normalizedInputLevel &&
+        account.password === this.password
+    );
 
-    if (
-      this.rut !== userAccount.rut ||
-      normalizedInputLevel !== normalizedStoredLevel ||
-      this.password !== userAccount.password
-    ) {
+    if (!user) {
       await this.presentToast('RUT, nivel educacional o contraseña incorrectos', 'danger');
       return;
     }
+
+    // Guardar el email del usuario logueado
+    localStorage.setItem('loggedInUserEmail', user.email);
+    console.log('Email guardado en localStorage:', user.email); // Depuración
+
+    localStorage.setItem('loggedInUserEmail', user.email);
 
     await this.presentToast('Inicio de sesión exitoso', 'success');
     this.router.navigate(['/principal']);
@@ -104,7 +108,3 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 }
-
-
-
-

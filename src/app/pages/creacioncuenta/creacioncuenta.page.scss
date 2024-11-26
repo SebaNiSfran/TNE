@@ -1,68 +1,263 @@
+// Variables de color
+$primary: #4c66f5;
+$primary-light: #FF00FF;
+$primary-dark: #3850d4;
+$secondary: #8c9eff;
+$accent: #c3cbff;
+$gradient-start: #4c66f5;
+$gradient-end: #6d83f7;
+$white: #ffffff;
+$gray-50: #f8fafc;
+$gray-100: #f1f5f9;
+$gray-700: #334155;
+$error: #ffffff;
+$success: #10b981;
+
+// Mixins
+@mixin glass-effect {
+  background: rgba($white, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba($primary, 0.08);
+}
+
+@mixin input-focus {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  &:focus-within {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($primary, 0.12);
+  }
+}
+
+// Estilos base
 ion-content {
-    --background: #f0f0f0; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px; 
+  --background: linear-gradient(135deg, #{$gradient-start} 0%, #{$gradient-end} 100%);
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba($accent, 0.4) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba($secondary, 0.4) 0%, transparent 40%);
+    animation: gradientMove 20s ease infinite;
+    z-index: -1;
+  }
 }
 
+// Contenedor principal
 .ion-padding {
-    background: white; 
-    border-radius: 12px; 
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); 
-    transition: transform 0.3s ease; 
-    padding: 30px; /* Espacio interno del formulario */
-    width: 100%; /* Ancho completo para responsividad */
-    max-width: 400px; /* Ancho máximo del formulario */
+  @include glass-effect;
+  max-width: min(90%, 450px);
+  margin: clamp(1.5rem, 5vh, 4rem) auto;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border-radius: 24px;
+  box-shadow: 
+    0 4px 20px rgba($primary, 0.15),
+    0 0 0 1px rgba($primary, 0.05);
+
+  &:hover {
+    box-shadow: 
+      0 8px 30px rgba($primary, 0.2),
+      0 0 0 1px rgba($primary, 0.08);
+  }
 }
 
-.ion-padding:hover {
-    transform: translateY(-4px); 
+// Formulario y elementos
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
+// Items e Inputs
 ion-item {
-    margin-bottom: 15px; 
+  --background: #{$gray-50};
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --min-height: 3.5rem;
+  --border-radius: 12px;
+  --border-width: 2px;
+  --border-color: transparent;
+  --highlight-color-focused: #{$primary};
+  margin: 0;
+  border-radius: 12px;
+  @include input-focus;
+
+  &.item-has-focus {
+    --border-color: #{rgba($primary, 0.5)};
+    background: rgba($primary, 0.02);
+  }
+
+  ion-label {
+    --color: #{$gray-700};
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  ion-input, ion-select {
+    --padding-top: 0.75rem;
+    --padding-bottom: 0.75rem;
+    --padding-start: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: $gray-700;
+    
+    &::placeholder {
+      color: rgba($gray-700, 0.5);
+    }
+  }
 }
 
+// Select personalizado
+ion-select {
+  &::part(icon) {
+    color: $primary;
+    opacity: 1;
+  }
+
+  &::part(text) {
+    color: $gray-700;
+  }
+}
+
+// Botones
 ion-button {
-    --border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease; 
-    font-weight: bold; 
+  --border-radius: 12px;
+  --box-shadow: none;
+  margin: 0.5rem 0;
+  height: 3.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:not([color="light"]) {
+    --background: linear-gradient(135deg, #{$primary} 0%, #{$primary-light} 100%);
+    
+    &:hover {
+      --background: linear-gradient(135deg, #{$primary-dark} 0%, #{$primary} 100%);
+      box-shadow: 0 4px 15px rgba($primary, 0.35);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba($white, 0.3) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:active::after {
+      opacity: 1;
+    }
+  }
+
+  &[color="light"] {
+    --background: transparent;
+    --color: #{$primary};
+    --border-width: 2px;
+    --border-style: solid;
+    --border-color: #{rgba($primary, 0.5)};
+    
+    &:hover {
+      --background: #{rgba($primary, 0.08)};
+      --border-color: #{$primary};
+    }
+  }
 }
 
-ion-button:hover {
-    transform: scale(1.05); 
-}
-
-ion-button[color="light"] {
-    color: #4285f4; 
-    background: transparent; 
-    border: 2px solid #4285f4; 
-}
-
-ion-button[color="light"]:hover {
-    background: linear-gradient(90deg, #4285f4, #34a853, #fbbc05, #ea4335); /* Gradiente de colores */
-    color: white; 
-}
-
+// Mensajes de error
 ion-note {
-    margin-top: 5px; 
-    font-size: 0.9em; 
-    font-style: italic; 
+  color: $error;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  padding-left: 1rem;
+  display: block;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: showError 0.3s ease forwards;
 }
 
-/* Responsividad */
-@media (max-width: 600px) {
-    ion-content {
-        padding: 10px; 
+// Animaciones
+@keyframes showError {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// Media Queries
+@media (max-width: 480px) {
+  .ion-padding {
+    margin: 1rem auto;
+    padding: 1.25rem;
+    border-radius: 20px;
+  }
+
+  ion-item {
+    --min-height: 3rem;
+    
+    ion-label {
+      font-size: 0.9rem;
     }
-}
 
-@media (min-width: 601px) {
-    ion-content {
-        padding: 20px; 
+    ion-input, ion-select {
+      font-size: 0.95rem;
     }
+  }
+
+  ion-button {
+    height: 3rem;
+    font-size: 0.95rem;
+  }
 }
 
-  
-  
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .ion-padding {
+    background: rgba($gray-700, 0.95);
+    border-color: rgba($primary, 0.15);
+  }
+
+  ion-item {
+    --background: rgba(#{$gray-700}, 0.5);
+    
+    ion-label {
+      --color: #{$gray-100};
+    }
+
+    ion-input, ion-select {
+      color: $gray-100;
+      
+      &::placeholder {
+        color: rgba($gray-100, 0.5);
+      }
+    }
+  }
+}
+
+// Mejoras de accesibilidad
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

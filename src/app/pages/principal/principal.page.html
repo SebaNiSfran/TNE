@@ -17,7 +17,13 @@
   </div>
 
   <div class="image-container">
-    <ion-img id="movableImage" src="assets/pase.png" class="rotating-img"></ion-img>
+    <!-- Imagen dinámica según el nivel educacional -->
+    <ion-img
+      id="movableImage"
+      [src]="tneImagen"
+      class="rotating-img"
+      alt="Imagen de la TNE"
+    ></ion-img>
   </div>
 
   <div class="action-buttons">
@@ -39,3 +45,4 @@
     </ion-button>
   </ion-item>
 </ion-content>
+

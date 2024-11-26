@@ -9,91 +9,50 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'recover-password',
-    redirectTo: 'recover-password',
-    pathMatch: 'full'
+    loadChildren: () => import('./pages/recover-password/recover-password.module').then(m => m.RecoverPasswordPageModule)
   },
   {
     path: 'principal',
-    redirectTo: 'principal',
-    pathMatch: 'full'
+    loadChildren: () => import('./pages/principal/principal.module').then(m => m.PrincipalPageModule)
   },
   {
     path: 'creacioncuenta',
-    redirectTo: 'creacioncuenta',
-    pathMatch: 'full'
+    loadChildren: () => import('./pages/creacioncuenta/creacioncuenta.module').then(m => m.CreacioncuentaPageModule)
   },
   {
-    path: 'creacioncuenta',
-    redirectTo: 'creacioncuenta',
-    pathMatch: 'full'
+    path: 'e404',
+    loadChildren: () => import('./pages/e404/e404.module').then(m => m.E404PageModule)
   },
   {
     path: 'e500',
-    redirectTo: 'e500',
-    pathMatch: 'full'
+    loadChildren: () => import('./pages/e500/e500.module').then(m => m.E500PageModule)
   },
   {
     path: 'e502',
-    redirectTo: 'e502',
-    pathMatch: 'full'
+    loadChildren: () => import('./pages/e502/e502.module').then(m => m.E502PageModule)
   },
   {
     path: 'recuperar-tne',
-    redirectTo: 'recuperar-tne',
-    pathMatch: 'full'
+    loadChildren: () => import('./pages/recuperar-tne/recuperar-tne.module').then(m => m.RecuperarTnePageModule)
   },
   {
     path: 'revalidar-tne',
-    redirectTo: 'revalidar-tne',
-    pathMatch: 'full'
+    loadChildren: () => import('./pages/revalidar-tne/revalidar-tne.module').then(m => m.RevalidarTnePageModule)
+  },
+  {
+    path: 'portal-pago',
+    loadChildren: () => import('./pages/portal-pago/portal-pago.module').then( m => m.PortalPagoPageModule)
   },
   {
     path: '**',
     redirectTo: 'e404',
     pathMatch: 'full'
   },
-  {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'recover-password',
-    loadChildren: () => import('./pages/recover-password/recover-password.module').then( m => m.RecoverPasswordPageModule)
-  },
-  {
-    path: 'principal',
-    loadChildren: () => import('./pages/principal/principal.module').then( m => m.PrincipalPageModule)
-  },
-  {
-    path: 'creacioncuenta',
-    loadChildren: () => import('./pages/creacioncuenta/creacioncuenta.module').then( m => m.CreacioncuentaPageModule)
-  },
-  {
-    path: 'e404',
-    loadChildren: () => import('./pages/e404/e404.module').then( m => m.E404PageModule)
-  },
-  {
-    path: 'e500',
-    loadChildren: () => import('./pages/e500/e500.module').then( m => m.E500PageModule)
-  },
-  {
-    path: 'e502',
-    loadChildren: () => import('./pages/e502/e502.module').then( m => m.E502PageModule)
-  },
-  {
-    path: 'recuperar-tne',
-    loadChildren: () => import('./pages/recuperar-tne/recuperar-tne.module').then( m => m.RecuperarTnePageModule)
-  },
-  {
-    path: 'revalidar-tne',
-    loadChildren: () => import('./pages/revalidar-tne/revalidar-tne.module').then( m => m.RevalidarTnePageModule)
-  },
-
+  
 
 ];
 
@@ -103,4 +62,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,0 +1,90 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Portal de Pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="payment-container">
+    <h2 class="payment-title">Realiza tu pago</h2>
+
+    <!-- Resumen de pago -->
+    <ion-card class="payment-summary">
+      <ion-card-header>
+        <ion-card-title>Resumen de Pago</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="payment-details">
+          <p><strong>Producto:</strong> Pago Actual</p>
+          <p><strong>Monto Total:</strong> ${{ paymentAmount | number:'1.0-0' }} CLP</p>
+          <p><strong>Fecha de Expiración:</strong> 31/04/2025</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Formulario de pago -->
+    <form (ngSubmit)="onPay()" #paymentForm="ngForm">
+      <ion-item>
+        <ion-label position="floating">Número de Tarjeta</ion-label>
+        <ion-input type="text" maxlength="11" required [(ngModel)]="cardNumber" name="cardNumber"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Fecha de Expiración</ion-label>
+        <ion-input type="text" placeholder="MM/YY" maxlength="5" required [(ngModel)]="expiryDate" name="expiryDate"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Código CVV</ion-label>
+        <ion-input type="text" maxlength="3" required [(ngModel)]="cvv" name="cvv"></ion-input>
+      </ion-item>
+
+      <!-- Monto a recargar -->
+      <ion-item>
+        <ion-label position="floating">Monto que desea recargar</ion-label>
+        <ion-input type="number" [(ngModel)]="paymentAmount" name="paymentAmount" min="1000" max="100000" required></ion-input>
+      </ion-item>
+
+      <!-- Validación de campos -->
+      <ion-text color="danger" *ngIf="paymentForm.invalid && formSubmitted">
+        <p>Por favor, complete todos los campos correctamente.</p>
+      </ion-text>
+
+      <ion-button 
+        expand="full" 
+        type="submit" 
+        class="ion-margin-top" 
+        [disabled]="paymentSuccess || !paymentAmount || paymentAmount < 1000 || paymentAmount > 100000">
+        Pagar Ahora
+      </ion-button>
+    </form>
+
+    <!-- Comprobante de pago -->
+    <div *ngIf="paymentSuccess" class="payment-comprobante">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Comprobante de Pago</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Producto:</strong> Pago Actual</p>
+          <p><strong>Monto Total:</strong> ${{ paymentAmount | number:'1.0-0' }} CLP</p>
+          <p><strong>Fecha de Pago:</strong> {{ paymentDate }}</p>
+          <p><strong>Estado:</strong> Pagado</p>
+          <!-- Botón para descargar el comprobante -->
+          <ion-button color="primary" href="{{ downloadLink }}" download>
+            <ion-icon slot="start" name="download-outline"></ion-icon>
+            Descargar Comprobante
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+      
+      <!-- Botón para nueva recarga -->
+      <ion-button 
+        expand="full" 
+        class="ion-margin-top" 
+        (click)="resetForm()">
+        Nueva Recarga
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

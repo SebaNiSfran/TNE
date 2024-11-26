@@ -24,11 +24,13 @@ export class CreacioncuentaPage implements OnInit {
 
   ngOnInit() {}
 
+  // Validación de email
   validateEmail() {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     this.emailValid = this.email === '' || emailRegex.test(this.email);
   }
 
+  // Verifica si el formulario es válido
   isFormValid(): boolean {
     return !!(
       this.rut && this.fullName && this.educationLevel &&
@@ -37,6 +39,7 @@ export class CreacioncuentaPage implements OnInit {
     );
   }
 
+  // Lógica para enviar el formulario de registro
   async onSubmit() {
     if (this.isFormValid()) {
       const userData = {
@@ -45,12 +48,32 @@ export class CreacioncuentaPage implements OnInit {
         educationLevel: this.normalizeEducationLevel(this.educationLevel),
         birthDate: this.birthDate,
         email: this.email,
-        password: this.password
+        password: this.password,
       };
 
-      localStorage.setItem('userAccount', JSON.stringify(userData));
+      // Obtener los usuarios existentes desde localStorage
+      const existingUsers = JSON.parse(localStorage.getItem('userAccounts') || '[]');
 
-      console.log('Datos guardados:', JSON.parse(localStorage.getItem('userAccount') || '{}'));
+      // Verificar si ya existe un usuario con el mismo email o RUT
+      const userExists = existingUsers.some(
+        (user: any) => user.email === userData.email || user.rut === userData.rut
+      );
+
+      if (userExists) {
+        const toast = await this.toastController.create({
+          message: 'Ya existe una cuenta con este correo o RUT.',
+          duration: 2000,
+          color: 'danger',
+        });
+        toast.present();
+        return;
+      }
+
+      // Agregar el nuevo usuario al arreglo de usuarios
+      existingUsers.push(userData);
+
+      // Guardar la lista actualizada de usuarios en localStorage
+      localStorage.setItem('userAccounts', JSON.stringify(existingUsers));
 
       const toast = await this.toastController.create({
         message: 'Cuenta creada exitosamente',
@@ -59,6 +82,7 @@ export class CreacioncuentaPage implements OnInit {
       });
       toast.present();
 
+      // Redirigir al login
       this.router.navigate(['/login']);
     } else {
       let errorMessage = 'Por favor, complete todos los campos correctamente.';
@@ -80,6 +104,7 @@ export class CreacioncuentaPage implements OnInit {
     }
   }
 
+  // Normaliza el nivel educativo
   normalizeEducationLevel(level: string): string {
     const normalized = level.toLowerCase().trim();
     switch (normalized) {
@@ -96,13 +121,10 @@ export class CreacioncuentaPage implements OnInit {
     }
   }
 
+  // Redirige a la página de login
   goToLogin() {
     this.router.navigate(['/login']);
   }
 }
-
-
-
-
 
 
