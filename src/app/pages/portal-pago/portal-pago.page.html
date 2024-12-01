@@ -5,6 +5,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Botón en la esquina superior izquierda -->
+  <ion-button 
+    class="back-button-corner" 
+    color="medium" 
+    fill="clear" 
+    (click)="goBackToHome()">
+    <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+  </ion-button>
+
   <div class="payment-container">
     <h2 class="payment-title">Realiza tu pago</h2>
 
@@ -85,6 +94,12 @@
         (click)="resetForm()">
         Nueva Recarga
       </ion-button>
-    </div>
-  </div>
-</ion-content>
+
+ <!-- Botón para volver a la página principal -->
+ <ion-button
+ expand="full"
+ class="ion-margin-top"
+ (click)="goBackToHome()"
+ slot="bottom">
+ Volver a la Página Principal
+</ion-button>

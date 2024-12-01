@@ -1,14 +1,14 @@
 /* Contenedor del contenido */
 ion-content {
-  --background: linear-gradient(135deg, #6a11cb, #2575fc); /* Fondo degradado */
+  --background: linear-gradient(135deg, #6a11cb, #2575fc); 
   display: flex;
-  justify-content: flex-start; /* Ajusta el contenido para que comience debajo del header */
+  justify-content: flex-start; 
   align-items: center;
-  flex-direction: column; /* Ordena los elementos verticalmente */
-  height: 100vh; /* Ocupar toda la ventana */
+  flex-direction: column; 
+  height: 100vh; 
   padding: 1rem;
   box-sizing: border-box;
-  padding-top: calc(var(--ion-safe-area-top) + 60px); /* Espacio reservado para el header */
+  padding-top: calc(var(--ion-safe-area-top) + 60px); 
 }
 
 /* Contenedor del formulario */
@@ -19,7 +19,7 @@ ion-content {
   padding: 2rem;
   width: 100%;
   max-width: 400px;
-  margin: auto; /* Centra automáticamente el formulario */
+  margin: auto; 
 }
 
 
@@ -47,7 +47,7 @@ ion-select {
   color: #333;
 }
 
-/* Etiquetas flotantes */
+/* Etiquetas  */
 ion-label {
   font-size: 0.9rem;
   color: #555;
@@ -84,3 +84,4 @@ ion-note {
     font-size: 1.2rem;
   }
 }
+

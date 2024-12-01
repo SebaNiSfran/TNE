@@ -19,9 +19,15 @@ export class RevalidarTnePage {
   imageDNI: File | null = null;
   imageCertificado: File | null = null;
 
-  // Agregar propiedades para mostrar nombres de archivos
+  //  propiedades para mostrar nombres de archivos
   imageDNIName: string = '';
   imageCertificadoName: string = '';
+
+  voucherHabilitado: boolean = false; 
+  tiempoRevalidacion: number = 5;
+  formularioHabilitado: boolean = true;
+  emailValid: boolean = true
+
 
   constructor(
     private router: Router,
@@ -29,7 +35,7 @@ export class RevalidarTnePage {
     private dbService: DbService
   ) {}
 
-  // Nuevo método para manejar la selección de archivos
+  //  método para manejar la selección de archivos
   async onFileSelected(event: any, type: string) {
     const file = event.target.files[0];
     if (file) {
@@ -45,7 +51,7 @@ export class RevalidarTnePage {
         return;
       }
 
-      // Verificar que sea una imagen
+      // Verificamos que sea una imagen
       if (!file.type.startsWith('image/')) {
         const toast = await this.toastController.create({
           message: 'Por favor, seleccione solo archivos de imagen.',
@@ -77,7 +83,10 @@ export class RevalidarTnePage {
       toast.present();
     }
   }
-
+  validateEmail() {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    this.emailValid = this.email === '' || emailRegex.test(this.email);
+  }
   // Método para iniciar la selección de archivo
   uploadImage(type: string) {
     const input = document.createElement('input');
@@ -90,10 +99,10 @@ export class RevalidarTnePage {
   async onSubmit() {
     if (this.isFormValid()) {
       try {
-        // Crear FormData para enviar archivos
+        // FormData para enviar archivos
         const formData = new FormData();
         
-        // Agregar datos del formulario
+        // Agregamos datos del formulario
         formData.append('rut', this.rut);
         formData.append('fullName', this.fullName);
         formData.append('comuna', this.comuna);
@@ -102,7 +111,7 @@ export class RevalidarTnePage {
         formData.append('telefono', this.telefono);
         formData.append('nivelEducacional', this.nivelEducacional);
 
-        // Agregar imágenes
+        // Agregamos imágenes
         if (this.imageDNI) formData.append('imageDNI', this.imageDNI);
         if (this.imageCertificado) formData.append('imageCertificado', this.imageCertificado);
 
@@ -116,6 +125,8 @@ export class RevalidarTnePage {
             color: 'success',
           });
           toast.present();
+          this.voucherHabilitado = true;
+          this.formularioHabilitado = false;
           this.limpiarFormulario();
         } else {
           throw new Error('Error al guardar en la base de datos');
@@ -138,6 +149,23 @@ export class RevalidarTnePage {
     }
   }
 
+  async confirmarDescargaVoucher() {
+    const confirmacion = window.confirm('¿Desea descargar el comprobante?');
+    if (confirmacion) {
+      this.descargarVoucher();
+      window.location.reload();
+    }
+  }
+
+  descargarVoucher() {
+    const fileUrl = '/assets/comprobante.jpeg';
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = 'comprobante.jpeg';
+    link.click();
+  }
+
+
   isFormValid() {
     return this.rut && this.fullName && this.comuna && this.establecimiento &&
            this.email && this.telefono && this.nivelEducacional && this.imageDNI && 
@@ -154,7 +182,6 @@ export class RevalidarTnePage {
     this.nivelEducacional = '';
     this.imageDNI = null;
     this.imageCertificado = null;
-    // Limpiar nombres de archivos
     this.imageDNIName = '';
     this.imageCertificadoName = '';
   }

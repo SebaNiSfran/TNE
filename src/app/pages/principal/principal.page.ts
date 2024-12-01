@@ -20,8 +20,8 @@ export class PrincipalPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.enableImageRotation(); // Activar rotación de imagen
-    this.loadUserInfo(); // Cargar información del usuario
+    this.enableImageRotation(); // Activa la rotación de imagen
+    this.loadUserInfo(); // Carga la información del usuario
   }
 
   // Logout: limpia localStorage y redirige a login
@@ -36,17 +36,17 @@ export class PrincipalPage implements OnInit {
     this.router.navigate(['/portal-pago']); 
   }
 
-  // Navegación a revalidar TNE
+  // Navegación para revalidar TNE
   onRevalidarTNE() {
     this.router.navigate(['/revalidar-tne']);
   }
 
-  // Navegación a recuperar TNE
+  // Navegación para recuperar TNE
   onRecuperarTNE() {
     this.router.navigate(['/recuperar-tne']);
   }
 
-  // Rotación de imagen con gestos
+  // Rotación de imagen 
   enableImageRotation() {
     const image = document.getElementById('movableImage');
     if (image) {

@@ -13,57 +13,73 @@
   <form (ngSubmit)="onSubmit()" #revalidarForm="ngForm" class="form-container">
     <ion-item>
       <ion-label position="floating">RUT</ion-label>
-      <ion-input [(ngModel)]="rut" name="rut" required></ion-input>
+      <ion-input [(ngModel)]="rut" name="rut" required [disabled]="!formularioHabilitado"></ion-input>
     </ion-item>
-
+  
     <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="fullName" name="fullName" required></ion-input>
+      <ion-label position="floating">Nombre Completo</ion-label>
+      <ion-input [(ngModel)]="fullName" name="fullName" required [disabled]="!formularioHabilitado"></ion-input>
     </ion-item>
-
+  
     <ion-item>
       <ion-label position="floating">Comuna</ion-label>
-      <ion-input [(ngModel)]="comuna" name="comuna" required></ion-input>
+      <ion-input [(ngModel)]="comuna" name="comuna" required [disabled]="!formularioHabilitado"></ion-input>
     </ion-item>
-
+  
     <ion-item>
       <ion-label position="floating">Establecimiento</ion-label>
-      <ion-input [(ngModel)]="establecimiento" name="establecimiento" required></ion-input>
+      <ion-input [(ngModel)]="establecimiento" name="establecimiento" required [disabled]="!formularioHabilitado"></ion-input>
     </ion-item>
-
+  
     <ion-item>
       <ion-label position="floating">Correo Electrónico</ion-label>
-      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+      <ion-input type="email" [(ngModel)]="email" name="email" required #emailField="ngModel" [disabled]="!formularioHabilitado" (ngModelChange)="validateEmail()"></ion-input>
+      <ion-note color="danger" *ngIf="email && !emailValid">Por favor, ingrese un correo electrónico válido</ion-note>
     </ion-item>
-
+  
     <ion-item>
       <ion-label position="floating">Número de Teléfono</ion-label>
-      <ion-input type="tel" [(ngModel)]="telefono" name="telefono" required></ion-input>
+      <ion-input type="tel" [(ngModel)]="telefono" name="telefono" required [disabled]="!formularioHabilitado"></ion-input>
     </ion-item>
-
+  
     <ion-item>
       <ion-label position="floating">Nivel Educacional</ion-label>
-      <ion-select [(ngModel)]="nivelEducacional" name="nivelEducacional" required>
+      <ion-select [(ngModel)]="nivelEducacional" name="nivelEducacional" required [disabled]="!formularioHabilitado">
         <ion-select-option value="basica">Básica</ion-select-option>
         <ion-select-option value="media">Media</ion-select-option>
         <ion-select-option value="superior">Superior</ion-select-option>
       </ion-select>
     </ion-item>
-
+  
     <ion-item>
       <ion-label>Foto del CARNET (Ambos lados)</ion-label>
-      <ion-button expand="full" (click)="uploadImage('dni')">Cargar Imagen</ion-button>
+      <ion-button expand="full" (click)="uploadImage('dni')" [disabled]="!formularioHabilitado">
+        Cargar Imagen
+      </ion-button>
       <ion-note *ngIf="imageDNIName">{{imageDNIName}}</ion-note>
     </ion-item>
-    
+  
     <ion-item>
       <ion-label>Certificado Alumno Regular</ion-label>
-      <ion-button expand="full" (click)="uploadImage('certificado')">Cargar Imagen</ion-button>
+      <ion-button expand="full" (click)="uploadImage('certificado')" [disabled]="!formularioHabilitado">
+        Cargar Imagen
+      </ion-button>
       <ion-note *ngIf="imageCertificadoName">{{imageCertificadoName}}</ion-note>
     </ion-item>
-
-    <ion-button expand="full" type="submit" color="primary">Enviar</ion-button>
+  
+    <ion-button expand="full" type="submit" color="primary" [disabled]="!formularioHabilitado">
+      Enviar
+    </ion-button>
+  
+    <ion-item *ngIf="voucherHabilitado">
+      <ion-label>Voucher Disponible (Tiempo de revalidación: {{ tiempoRevalidacion }} días)</ion-label>
+      <ion-button (click)="confirmarDescargaVoucher()">
+        <ion-icon name="document-outline" slot="start"></ion-icon>
+        Descargar Voucher
+      </ion-button>
+    </ion-item>
   </form>
+  
 </ion-content>
 
 

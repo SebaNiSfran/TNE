@@ -1,75 +1,79 @@
 .payment-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.payment-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.payment-summary {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-summary ion-card-header {
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+}
+
+.payment-details {
+  padding: 10px;
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+ion-item {
+  margin-bottom: 15px;
+}
+
+ion-label {
+  font-size: 1.1em;
+}
+
+ion-button {
+  background-color: #007bff;
+  color: white;
+  font-size: 1.1em;
+  padding: 10px;
   
-  .payment-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .payment-summary {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .payment-summary ion-card-header {
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-  }
-  
-  .payment-details {
-    padding: 10px;
-    font-size: 1.2em;
-    line-height: 1.5;
-  }
-  
-  ion-item {
-    margin-bottom: 15px;
-  }
-  
-  ion-label {
-    font-size: 1.1em;
-  }
-  
-  ion-button {
-    background-color: #007bff;
-    color: white;
-    font-size: 1.1em;
-    padding: 10px;
-  }
-  
-  ion-button:hover {
+  &:hover {
     background-color: #0056b3;
   }
-  
-  .payment-comprobante {
-    margin-top: 30px;
+
+  /* Asegura que haya suficiente espacio entre los botones */
+  &.ion-margin-top {
+    margin-top: 10px;
   }
-  
-  .payment-comprobante ion-card-header {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .payment-comprobante ion-card-title {
-    font-size: 1.2em;
-  }
-  
-  .payment-comprobante p {
-    font-size: 1.1em;
-    margin: 10px 0;
-  }
-  
-  ion-text {
-    margin-bottom: 10px;
-  }
-  
-  ion-icon {
-    font-size: 20px;
-    margin-right: 5px;
-  }
-  
+}
+
+.payment-comprobante {
+  margin-top: 30px;
+}
+
+.payment-comprobante ion-card-header {
+  background-color: #28a745;
+  color: white;
+}
+
+.payment-comprobante ion-card-title {
+  font-size: 1.2em;
+}
+
+.payment-comprobante p {
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+ion-text {
+  margin-bottom: 10px;
+}
+
+ion-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}

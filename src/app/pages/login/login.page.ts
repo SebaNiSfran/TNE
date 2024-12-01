@@ -60,7 +60,7 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    // Guardar el email del usuario logueado
+    // Guarda el email del usuario logueado
     localStorage.setItem('loggedInUserEmail', user.email);
     console.log('Email guardado en localStorage:', user.email); // Depuración
 

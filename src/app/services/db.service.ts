@@ -18,7 +18,7 @@ export class DbService {
     this.initializeDB();
   }
 
-  // Inicializar la base de datos
+  // Inicializamos la base de datos
   private async initializeDB() {
     try {
       await this.platform.ready();
@@ -33,7 +33,7 @@ export class DbService {
     }
   }
 
-  // Crear las tablas necesarias
+  // Creamos las tablas necesarias
   private async createTables() {
     const revalidarTable = `
       CREATE TABLE IF NOT EXISTS ${this.db_table_revalidar} (

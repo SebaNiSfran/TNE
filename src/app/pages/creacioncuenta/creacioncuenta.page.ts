@@ -69,10 +69,10 @@ export class CreacioncuentaPage implements OnInit {
         return;
       }
 
-      // Agregar el nuevo usuario al arreglo de usuarios
+      // Agrega el nuevo usuario al arreglo de usuarios
       existingUsers.push(userData);
 
-      // Guardar la lista actualizada de usuarios en localStorage
+      // Guarda la lista actualizada de usuarios en localStorage
       localStorage.setItem('userAccounts', JSON.stringify(existingUsers));
 
       const toast = await this.toastController.create({
@@ -82,7 +82,7 @@ export class CreacioncuentaPage implements OnInit {
       });
       toast.present();
 
-      // Redirigir al login
+      // Redirige al login
       this.router.navigate(['/login']);
     } else {
       let errorMessage = 'Por favor, complete todos los campos correctamente.';
